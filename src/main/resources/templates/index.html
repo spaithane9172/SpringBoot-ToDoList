@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ToDoList-With-SpringBoot</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="/maincss.css" rel="stylesheet">
+    </head>
+    <body>
+        <div th:insert="navBar"></div>
+        <div class="mt-20 container mx-auto">
+            <h1 class="text-center my-5 font-medium text-2xl underline
+                underline-offset-4">Task List</h1>
+            <div class="container mx-auto flex flex-col justify-center
+                items-center">
+                <div class="mb-2 w-[80vw] border border-1 border-gray-600
+                    border-solid rounded-lg shadow-md flex justify-between p-5
+                    items-center">
+                    <h1 class="text-md text-sans font-medium">Task Name</h1>
+                    <p class="text-md text-sans font-medium">Task Description</p>
+                    <p class="text-md text-sans font-medium">Task Status</p>
+                    <p class="text-md text-sans font-medium text-right">Operation</p>
+                </div>
+                <div class="overflow-auto h-[60vh] bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-60 border border-gray-200">
+                    <div th:each="task:${tasks}" class="mb-2 w-[80vw] border
+                        border-1 border-gray-600 border-solid rounded-lg
+                        shadow-md flex justify-between p-5 items-center">
+                        <h1 class="text-md text-sans font-normal w-[33%]"
+                            th:text="${task.getName()}"></h1>
+                        <p class="text-md text-sans font-normal w-[33%]"
+                            th:text="${task.getDescription()}"></p>
+                        <p class="text-md text-sans font-normal w-[33%]"
+                            th:text="${task.getStatus()}"></p>
+                        <p class="text-md text-sans font-medium text-right"><a
+                                th:href="@{'deleteTask/'+${task.getId()}}"
+                                class="rounded-md mr-2 p-2 bg-red-600
+                                text-white">Delete</a><a
+                                th:href="@{'updateTask/'+${task.getId()}}"
+                                class="rounded-md p-2 bg-blue-600 text-white">Edit</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
